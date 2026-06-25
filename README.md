@@ -11,7 +11,7 @@ This guide shows what Alex Horror can do. Use it to record videos, surprise frie
 Most event commands can target another online player. For example, to put Alex behind a player called `AlexFan`, run:
 
 ```mcfunction
-/testbehindyou AlexFan
+/testbehindyou Joe123
 ```
 
 Without a player name, run the command as the person who should experience the event.
