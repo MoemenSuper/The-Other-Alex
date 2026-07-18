@@ -1,6 +1,6 @@
 # Alex Horror Mod — Command Event Guide
 
-This guide shows what Alex Horror can do. Use it to record videos, surprise friends on a multiplayer server, test a feature, or simply explore every event in the mod.
+Use this guide to test events, film scenes, and surprise friends on a multiplayer server.
 
 > **Important:** almost every command in this guide is an **operator/admin command** (permission level 2). Enable cheats in a single-player world, or give yourself operator status on a server. `/spawnalex` is the one public command.
 
@@ -14,7 +14,7 @@ Most event commands can target another online player. For example, to put Alex b
 /testbehindyou AlexFan
 ```
 
-Without a player name, run the command as the person who should experience the event.
+Without a player name, run the command as the target player.
 
 ### Why a forced event can fail
 
@@ -25,7 +25,7 @@ Without a player name, run the command as the person who should experience the e
 - A living, non-spectator target; some events also reject Creative mode.
 - Required content: a saved voice clip, chat history, an optional integration mod, a Herobrine entity, or a valid structure.
 
-If Minecraft reports a reason such as `NO_VALID_SPAWN`, make more open, safe space around the target and retry. This usually does not mean that the command is broken.
+If Minecraft reports `NO_VALID_SPAWN`, clear space around the target and retry.
 
 ### Recommended filming setup
 
@@ -37,7 +37,7 @@ If Minecraft reports a reason such as `NO_VALID_SPAWN`, make more open, safe spa
 
 ## The mod’s event language
 
-The mod uses a few terms consistently:
+The mod uses these terms:
 
 | Term | Plain meaning |
 | --- | --- |
@@ -49,20 +49,20 @@ The mod uses a few terms consistently:
 | **Creator Showcase** | A setting that tries to show a player events they have not seen yet. |
 | **Integration** | An optional event that reacts to another installed mod. |
 
-Alex is designed as slow-burn psychological horror. Command events are excellent for testing and filming, but repeated rapid triggering will make scenes feel less surprising than natural Director pacing.
+Alex works best as slow-burn psychological horror. Use commands to test or film a scene, then leave space between major events.
 
 ### Experimental Creator Showcase mode
 
-**Creator Showcase is experimental and disabled by default.** To use it, enable it in the common config:
+**Creator Showcase is experimental and disabled by default.** Enable it in the common config:
 
 ```toml
 [creator_showcase]
 enabled = true
 ```
 
-It remembers the scheduled events each player has seen, then prefers eligible events they have not seen yet. Seen events can still repeat. Leave `enabled = false` to use the normal event selection.
+It records the scheduled events each player has seen and prefers eligible unseen events. Seen events can still repeat. Leave `enabled = false` for normal event selection.
 
-It does **not** ignore safety checks, cooldowns, or location requirements. For example, it cannot start a cave event when the player is not in a suitable cave. Progress is saved with the world.
+Creator Showcase keeps safety checks, cooldowns, and location requirements. It cannot start a cave event outside a suitable cave. The world saves each player's progress.
 
 ---
 
@@ -188,6 +188,35 @@ Use `/testsign` with no type to print the in-game sign command help. `/chatinfo 
 | `/testleaflessgrovelightning [player]` | Strikes treetops in a Leafless Grove. | The target must be inside a Leafless Grove structure with found log-column treetops. |
 | `/testanomalybridge [radius] [player]` | Attempts an Anomaly dark scene within radius 4–128 (default 56). | Uses natural checks. `/testanomalybridge force [radius] [player]` requests the forced variant, but the integration still needs usable world data. |
 
+## Additional events
+
+| Event | Command | What it does |
+| --- | --- | --- |
+| Mob Alert | `/testmobalert [player]` | Nearby hostile mobs turn on the player. |
+| Log Player Sighting | `/testlogplayer [player]` | A player-shaped log appears beside a suitable log block. |
+| Crawling Tunnel | `/testcrawlingtunnel [player]` | Alex crawls down a one-block-high mining tunnel toward the player. |
+| Tunnel Pass-By | `/testtunnelpassby [player]` | Alex runs across the obvious opening or exit in a cramped tunnel. |
+| Cave Silhouette | `/testcavesilhouette [player]` | Alex appears as a distant silhouette in a cave opening. |
+| Window Peek | `/testwindowpeek [player]` | Alex slides past a suitable window. |
+| Strip-Mining Trap | `/teststripminingtrap [player]` | Stages the fake miner and roadblock trap. Use `solo` for the debug-only companion bypass and `status` to inspect the scene. |
+| Missing Favorite Item | `/missingitem trigger [player] [delay_seconds]` | Removes an inventory item, then returns it later. `triggerheld`, `status`, `return`, and `cancel` are also available. |
+| Photo Memory | `/alexphoto capture` | Captures a hidden-perspective photo. Use `/alexphoto give` and `/alexphoto place` to stage a frame. Natural events can leave frames at a player's home. |
+| Invitation Trail | `/alexinvitationtrail start [player]` | Starts the book-and-coordinate trail toward its void-descent payoff. `status`, `reveal`, `expire`, and `payoff` are available for filming. |
+| Home Replica | `/alexhomereplica start [player]` | Creates a corrupted sky copy of the player's recognized home. `claimhere` marks a test home site; `status` and `cleanup` manage it. |
+| The One Who Stayed | `/theonewhostayed start [player]` | A rare multiplayer Mimic copies a recently absent nearby player using saved identity, chat, and approved voice data. `status`, `candidates`, `selftest`, and `stop` help test it. |
+| Anomaly Run Warning | `/testanomalyrunwarning [player]` | With **Anomaly Rephased** installed, Alex warns the player beside `a_happy`, then the Anomaly resumes its own chase. |
+| Anomaly Shadow Tree Peek | `/testanomalytreepeek [player]` | Requires **Anomaly Rephased**. Alex appears in an Anomaly-linked tree-peek scene. |
+| Anomaly Void Stairway | `/testanomalyvoidstairway [player]` | With **Anomaly Rephased** installed, creates the void-stairway scene. |
+| From the Caves Billy Sleep | `/testfromthecavesbillysleep [player]` | With **From the Caves** installed, Alex approaches a sleeping player and hands the wake-up payoff to that mod's bed-drag scare. |
+| From the Caves crossovers | `/testfromthecavesintegrations pet\|purified\|tunnel fixture\|natural` | Tests Pet Omen, Purified, But Not Saved, and Unfinished Tunnel. Use `fixture` for setup testing or `natural` to retain the normal gates. |
+| Bed Occupied | `/bedoccupied trigger [player]` | Starts the bed-pressure event. `status`, `clear`, and `pressure set` manage it. |
+
+### Natural-only and scripted events
+
+- **Horse Freeze** stops a nearby horse.
+- **Cave Ambiance**, **Sudden Breath**, and **Alex Breathing** are short sound events.
+- **Fake Discord Notification** has five world milestones: Minecraft days 3, 15, 35, 70, and 120. Each milestone can play a notification for one player, then place one authored sign behind them. Each one happens once per world.
+
 ## Voice and memory features
 
 ### Voice echo
@@ -204,7 +233,7 @@ Use `/testsign` with no type to print the in-game sign command help. `/chatinfo 
 
 ### Chat, sign memory, and LLM controls
 
-The sign system can use in-game chat and approved voice transcripts. It does not claim real-world private knowledge: its available context is Minecraft gameplay, chat, voice chat, configuration, and mod state.
+The sign system uses in-game chat and approved voice transcripts. It only uses Minecraft gameplay, chat, voice chat, configuration, and mod state.
 
 - `/alexllm status` — reports whether the sign LLM is ready and prints diagnostics.
 - `/alexllm setkey <key>` / `clear` — sets/clears the temporary runtime LLM key. Keep the key out of recordings and server logs.
@@ -239,4 +268,4 @@ The sign system can use in-game chat and approved voice transcripts. It does not
 
 The command system is intentionally split by feature: `EventDirector` owns pacing; individual Controllers own their distinct cave, line-of-sight, spawn, and geometry checks; optional integrations remain optional. That is why similarly named commands can have different requirements.
 
-Use commands to stage a moment, but let a normal survival session breathe between major manifestations. The best Alex footage usually gives the audience time to notice the Hint or Pressure before the reveal.
+Use commands to stage a moment. In normal survival play, leave room between major manifestations so players can notice the hint or pressure before the reveal.
