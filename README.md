@@ -11,7 +11,7 @@ Use this guide to test events, film scenes, and surprise friends on a multiplaye
 Most event commands can target another online player. For example, to put Alex behind a player called `AlexFan`, run:
 
 ```mcfunction
-/testbehindyou AlexFan
+/testbehindyou Joe123
 ```
 
 Without a player name, run the command as the target player.
